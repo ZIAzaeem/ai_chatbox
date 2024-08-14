@@ -1,3 +1,22 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --background-color: #f5f5f5;
+  --text-color: #333;
+  --border-radius: 8px;
+  --shadow-light: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -5,6 +24,7 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background: linear-gradient(120deg, #f0f9ff 0%, #cbebff 100%);
 }
 
 .description {
@@ -16,6 +36,9 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .description a {
@@ -23,6 +46,12 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.description a:hover {
+  color: var(--accent-color);
 }
 
 .description p {
@@ -32,45 +61,63 @@
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  backdrop-filter: blur(10px);
 }
 
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
+  color: var(--primary-color);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
   max-width: 100%;
   width: var(--max-width);
+  padding: 2rem 0;
 }
 
 .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
+  background: rgba(var(--card-rgb), 0.6);
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: var(--shadow-light);
+  cursor: pointer;
 }
 
 .card span {
   display: inline-block;
-  transition: transform 200ms;
+  transition: transform 0.3s ease;
 }
 
 .card h2 {
   font-weight: 600;
   margin-bottom: 0.7rem;
+  color: var(--text-color);
 }
 
 .card p {
   margin: 0;
-  opacity: 0.6;
+  opacity: 0.8;
   font-size: 0.9rem;
   line-height: 1.5;
   max-width: 30ch;
   text-wrap: balance;
+  color: var(--text-color);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(var(--card-rgb), 0.8);
+}
+
+.card:hover span {
+  transform: translateX(6px);
 }
 
 .center {
@@ -107,16 +154,17 @@
 
 .logo {
   position: relative;
+  animation: rotate 20s linear infinite;
 }
-/* Enable hover only on non-touch devices */
+
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+    background: rgba(var(--card-rgb), 0.9);
+    border: 1px solid rgba(var(--card-border-rgb), 0.25);
   }
 
   .card:hover span {
-    transform: translateX(4px);
+    transform: translateX(8px);
   }
 }
 
@@ -124,9 +172,11 @@
   .card:hover span {
     transform: none;
   }
+  .logo {
+    animation: none;
+  }
 }
 
-/* Mobile */
 @media (max-width: 700px) {
   .content {
     padding: 4rem;
@@ -203,20 +253,38 @@
   }
 }
 
-/* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+
   .vercelLogo {
     filter: invert(1);
   }
 
   .logo {
     filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .card:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .description p {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
 
